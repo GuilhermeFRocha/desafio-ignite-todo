@@ -1,0 +1,54 @@
+:root {
+    --black: #0D0D0D;
+    --fnd: #262626;
+    --red: 	#ad273f;
+    --background: #EBEBEB;
+    --shapes: #9a00ff;
+    --text-title: #3D3D4D;
+    --text: #fff;
+    --text-light: #A09CB1;
+    --input: #262626;
+    --btn: #1E6F9F
+  }
+
+  html {
+    background-color: #191919;
+  }
+  
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font: 16px "Poppins", Arial, sans-serif;
+    color: #121214;
+  }
+  
+  input, textarea {
+    font-family: "Poppins";
+    background-color:  var(--fnd);
+    padding: 10px;
+    border-radius: 10px;
+    color: #808080;
+    border: 2px solid var(--black);
+  }
+
+  input::placeholder {
+    color: #808080
+  }
+  
+  .container {
+    max-width: 1120px;
+    margin: 0 auto;
+  }
+  
+  button {
+    cursor: pointer;
+    background-color: var(--btn);
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+
+  }
