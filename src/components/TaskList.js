@@ -28,9 +28,9 @@ export const TaskList = () => {
           task.isComplete = !task.isComplete;
         }
 
-        if (task.isComplete === false) {
+        if (task.isComplete === true && task.id === id) {
             setNumberTask(numberTask + 1);
-        } else {
+        } else if (task.isComplete === false && task.id === id) {
             setNumberTask(numberTask - 1);
         }
         return task;
@@ -38,9 +38,16 @@ export const TaskList = () => {
     );
   }
 
+  console.log(numberTask);
+
   function handleRemoveTask(id) {
     // Remova uma task da listagem pelo ID
-    setTasks(tasks.filter((item) => item.id !== id ));
+    setTasks(tasks.filter((item) => {
+      if (item.isComplete === true && item.id === id) {
+        setNumberTask(numberTask - 1);
+      }
+      return item.id !== id
+    } ));
     
   }
   return (
