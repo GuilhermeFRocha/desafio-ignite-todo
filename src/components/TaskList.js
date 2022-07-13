@@ -29,26 +29,25 @@ export const TaskList = () => {
         }
 
         if (task.isComplete === true && task.id === id) {
-            setNumberTask(numberTask + 1);
+          setNumberTask(numberTask + 1);
         } else if (task.isComplete === false && task.id === id) {
-            setNumberTask(numberTask - 1);
+          setNumberTask(numberTask - 1);
         }
         return task;
       })
     );
   }
 
-  console.log(numberTask);
-
   function handleRemoveTask(id) {
     // Remova uma task da listagem pelo ID
-    setTasks(tasks.filter((item) => {
-      if (item.isComplete === true && item.id === id) {
-        setNumberTask(numberTask - 1);
-      }
-      return item.id !== id
-    } ));
-    
+    setTasks(
+      tasks.filter((item) => {
+        if (item.isComplete === true && item.id === id) {
+          setNumberTask(numberTask - 1);
+        }
+        return item.id !== id;
+      })
+    );
   }
   return (
     <section className=" container">
@@ -71,9 +70,9 @@ export const TaskList = () => {
       </header>
 
       <div className="result-task">
-       <p>Tarefas criadas: {tasks.length}</p>
-       <p>Concluidas: {numberTask}</p>
-        </div>
+        <p>Tarefas criadas: {tasks.length}</p>
+        <p>Concluidas: {numberTask}</p>
+      </div>
 
       <main>
         <ul>
