@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../styles/tasklist.scss";
 import { FiTrash, FiCheckSquare } from "react-icons/fi";
 
@@ -15,11 +15,14 @@ export const TaskList = () => {
         isComplete: false,
       };
       setTasks([...tasks, newTask]);
+      localStorage.setItem("tasks", JSON.stringify([...tasks, newTask]));
+
       setNewTaskTitle("");
     }
   }
 
   function handleToggleTaskCompletion(id) {
+
     setTasks(
       tasks.map((task) => {
         if (task.id === id) {
@@ -34,18 +37,35 @@ export const TaskList = () => {
         return task;
       })
     );
+
+
   }
 
   function handleRemoveTask(id) {
+    const tasksFiltered = tasks.filter(task => task.id !== id)
+
     setTasks(
       tasks.filter((item) => {
-        if (item.isComplete === true && item.id === id) {
+        if (item.isComplete && item.id === id) {
+          
           setNumberTask(numberTask - 1);
+
         }
         return item.id !== id;
       })
     );
+
+    localStorage.setItem("tasks", JSON.stringify(tasksFiltered));
+
   }
+
+  useEffect(() => {
+    const localStorageTasks = localStorage.getItem("tasks");
+    if (localStorageTasks) {
+      setTasks(JSON.parse(localStorageTasks));
+    }
+  }, []);
+
   return (
     <section className=" container">
       <header className="header">
@@ -73,7 +93,7 @@ export const TaskList = () => {
 
       <main>
         <ul>
-          {tasks.map((task) => (
+          {tasks.length ? tasks.map((task) => (
             <li key={task.id}>
               <div
                 className={task.isComplete ? "completed" : ""}
@@ -99,7 +119,7 @@ export const TaskList = () => {
                 <FiTrash size={16} color={"#5e60cd"} />
               </button>
             </li>
-          ))}
+          )) : <h3 className="registerTask">Cadastre uma tarefa!</h3>}
         </ul>
       </main>
     </section>
